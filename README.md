@@ -20,10 +20,10 @@ No dependencies. No install step. No config file. Just Python 3 and a terminal.
 ```bash
 git clone https://github.com/Utzig26/autotris
 cd autotris
-python3 autotris.py
+python3 -m autotris
 ```
 
-That is the whole installation. It is five Python files and the standard library.
+That is the whole installation: the standard library and nothing else.
 
 > Needs Python 3.10+ and a terminal with truecolor (ghostty, kitty, alacritty,
 > foot, wezterm, iTerm2, Windows Terminal). Pass `--ascii` if your terminal has
@@ -32,10 +32,10 @@ That is the whole installation. It is five Python files and the standard library
 ## Quick start
 
 ```bash
-python3 autotris.py                     # cycles through every theme
-python3 autotris.py -t tokyo-night      # pick one
-python3 autotris.py -t system           # match your desktop theme, live
-python3 autotris.py -z -F               # zen: no HUD, board fills the window
+python3 -m autotris                     # cycles through every theme
+python3 -m autotris -t tokyo-night      # pick one
+python3 -m autotris -t system           # match your desktop theme, live
+python3 -m autotris -z -F               # zen: no HUD, board fills the window
 ```
 
 Press `h` at any time for the controls.
@@ -43,7 +43,7 @@ Press `h` at any time for the controls.
 The setup I actually leave running on the second screen:
 
 ```bash
-python3 autotris.py -z -F -t system -s 1.5
+python3 -m autotris -z -F -t system -s 1.5
 ```
 
 ## The second-monitor problem
@@ -179,8 +179,8 @@ the UI takes accent/background/foreground, and light themes invert the block
 shading automatically.
 
 ```bash
-python3 autotris.py -t gruvbox
-python3 autotris.py --list        # everything available on your machine
+python3 -m autotris -t gruvbox
+python3 -m autotris --list        # everything available on your machine
 ```
 
 `-t system` (or the `o` key) uses whatever theme your desktop is on **right
@@ -218,13 +218,14 @@ Costs about 5% of one core at 30fps.
 
 ## Project layout
 
-| file | what is in it |
-|------|--------------|
-| `engine.py` | pieces, board, and the brain — bitboard heuristics and tuning constants |
-| `themes.py` | palettes, cell glyphs, frames, backgrounds |
-| `omarchy.py` | reading Omarchy's theme files |
-| `render.py` | the cell canvas and ANSI output |
-| `autotris.py` | game loop, effects, layout, keyboard, transitions |
+| package | what is in it |
+|---------|--------------|
+| `core/` | board, pieces, scoring and the game state machine — emits events, draws nothing |
+| `ai/` | the brain: bitboard heuristics, an `Evaluator` and a `Strategy` per level |
+| `display/` | the cell canvas, colour maths and terminal ownership |
+| `theming/` | themes, block styles, animated backdrops, Omarchy loading |
+| `view/` | widgets: panels, board, overlays, transitions, effects |
+| `input/` | key decoding and one command per binding |
 | `tools/record.py` | renders the demo gif without involving a terminal |
 
 ## License
