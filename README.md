@@ -17,12 +17,24 @@ No dependencies. No install step. No config file. Just Python 3 and a terminal.
 
 ## Install
 
-**Arch Linux (AUR)**
+**Arch Linux** — a real package, no AUR account needed
 
 ```bash
-yay -S autotris          # tagged release
-yay -S autotris-git      # latest commit
+# prebuilt, from the release
+curl -LO https://github.com/Utzig26/autotris/releases/download/v1.0.0/autotris-1.0.0-1-any.pkg.tar.zst
+sudo pacman -U autotris-1.0.0-1-any.pkg.tar.zst
+
+# or build it yourself
+git clone https://github.com/Utzig26/autotris
+cd autotris/packaging/aur && makepkg -si
 ```
+
+There are no build dependencies, so `makepkg` neither compiles nor downloads
+anything beyond the source tarball.
+
+> An AUR package is planned (`yay -S autotris`), but AUR account registration is
+> paused while they deal with a wave of automated signups. The PKGBUILDs are
+> already in `packaging/` and ready to publish the day it reopens.
 
 **Any system, no package manager**
 

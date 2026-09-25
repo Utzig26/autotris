@@ -17,11 +17,29 @@ cd aur && makepkg -f          # builds autotris-1.0.0-1-any.pkg.tar.zst
 sudo pacman -U autotris-*.pkg.tar.zst
 ```
 
+## Installing without the AUR
+
+The AUR is not required. Either of these gives you a proper pacman package:
+
+```bash
+cd aur && makepkg -si                    # build and install from source
+sudo pacman -U autotris-*.pkg.tar.zst    # or install a prebuilt one
+```
+
+A prebuilt package is attached to every GitHub release.
+
 ## Publishing to the AUR
+
+> **AUR registration is currently paused** while the Arch team deals with a wave
+> of automated account creation. Existing accounts are unaffected — if you
+> already have one, skip to step 2. Otherwise this has to wait for registration
+> to reopen; it is announced on aur-general and the Arch news feed. Do not
+> script retries against the registration page.
 
 One-time setup, and only you can do it: the AUR needs your SSH public key.
 
-1. Create an account at <https://aur.archlinux.org/register> (skip if you have one).
+1. Create an account at <https://aur.archlinux.org/register> (skip if you have one;
+   currently paused, see the note above).
 2. Open <https://aur.archlinux.org/account/> → **My Account** → paste the contents
    of `~/.ssh/id_ed25519.pub` into **SSH Public Key** → Save.
 3. Check it took:
