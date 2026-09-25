@@ -1,0 +1,15 @@
+pkgbase = autotris-git
+	pkgdesc = A tetris that plays itself, for the monitor you are not working on (git)
+	pkgver = r5.5ca5bbc
+	pkgrel = 1
+	url = https://github.com/Utzig26/autotris
+	arch = any
+	license = MIT
+	makedepends = git
+	depends = python>=3.10
+	provides = autotris
+	conflicts = autotris
+	source = autotris::git+https://github.com/Utzig26/autotris.git
+	sha256sums = SKIP
+
+pkgname = autotris-git

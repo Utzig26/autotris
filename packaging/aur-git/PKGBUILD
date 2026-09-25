@@ -1,0 +1,37 @@
+# Maintainer: Gabriel Utzig <gabriel.utzig26@gmail.com>
+pkgname=autotris-git
+_pkgname=autotris
+pkgver=r5.5ca5bbc
+pkgrel=1
+pkgdesc="A tetris that plays itself, for the monitor you are not working on (git)"
+arch=('any')
+url="https://github.com/Utzig26/autotris"
+license=('MIT')
+depends=('python>=3.10')
+makedepends=('git')
+provides=("$_pkgname")
+conflicts=("$_pkgname")
+source=("$_pkgname::git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$_pkgname"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+package() {
+  cd "$_pkgname"
+
+  install -dm755 "$pkgdir/usr/lib/$_pkgname"
+  cp -r autotris "$pkgdir/usr/lib/$_pkgname/"
+
+  install -dm755 "$pkgdir/usr/bin"
+  cat > "$pkgdir/usr/bin/$_pkgname" <<'LAUNCHER'
+#!/bin/sh
+exec python3 -c 'import sys; sys.path.insert(0, "/usr/lib/autotris"); from autotris.cli import main; main()' "$@"
+LAUNCHER
+  chmod 755 "$pkgdir/usr/bin/$_pkgname"
+
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$_pkgname/README.md"
+}

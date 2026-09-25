@@ -17,17 +17,36 @@ No dependencies. No install step. No config file. Just Python 3 and a terminal.
 
 ## Install
 
+**Arch Linux (AUR)**
+
+```bash
+yay -S autotris          # tagged release
+yay -S autotris-git      # latest commit
+```
+
+**Any system, no package manager**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Utzig26/autotris/main/install.sh | sh
+```
+
+**With pipx or pip**
+
+```bash
+pipx install git+https://github.com/Utzig26/autotris
+```
+
+**From a clone**
+
 ```bash
 git clone https://github.com/Utzig26/autotris
 cd autotris
 python3 -m autotris
 ```
 
-That is the whole installation: the standard library and nothing else.
-
 > Needs Python 3.10+ and a terminal with truecolor (ghostty, kitty, alacritty,
 > foot, wezterm, iTerm2, Windows Terminal). Pass `--ascii` if your terminal has
-> no unicode block glyphs.
+> no unicode block glyphs. There are no third-party dependencies.
 
 ## Quick start
 
@@ -227,6 +246,7 @@ Costs about 5% of one core at 30fps.
 | `view/` | widgets: panels, board, overlays, transitions, effects |
 | `input/` | key decoding and one command per binding |
 | `tools/record.py` | renders the demo gif without involving a terminal |
+| `packaging/` | AUR PKGBUILDs and the publish script |
 
 ## License
 

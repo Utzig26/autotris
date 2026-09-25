@@ -1,0 +1,12 @@
+pkgbase = autotris
+	pkgdesc = A tetris that plays itself, for the monitor you are not working on
+	pkgver = 1.0.0
+	pkgrel = 1
+	url = https://github.com/Utzig26/autotris
+	arch = any
+	license = MIT
+	depends = python>=3.10
+	source = autotris-1.0.0.tar.gz::https://github.com/Utzig26/autotris/archive/refs/tags/v1.0.0.tar.gz
+	sha256sums = 02b699e1428f9bd084be4ed73f386f029d60b66538cf4ae5c16710f07a6dfc5b
+
+pkgname = autotris

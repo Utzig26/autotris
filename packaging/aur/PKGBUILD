@@ -1,0 +1,28 @@
+# Maintainer: Gabriel Utzig <gabriel.utzig26@gmail.com>
+pkgname=autotris
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="A tetris that plays itself, for the monitor you are not working on"
+arch=('any')
+url="https://github.com/Utzig26/autotris"
+license=('MIT')
+depends=('python>=3.10')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('02b699e1428f9bd084be4ed73f386f029d60b66538cf4ae5c16710f07a6dfc5b')
+
+package() {
+  cd "$pkgname-$pkgver"
+
+  install -dm755 "$pkgdir/usr/lib/$pkgname"
+  cp -r autotris "$pkgdir/usr/lib/$pkgname/"
+
+  install -dm755 "$pkgdir/usr/bin"
+  cat > "$pkgdir/usr/bin/$pkgname" <<'LAUNCHER'
+#!/bin/sh
+exec python3 -c 'import sys; sys.path.insert(0, "/usr/lib/autotris"); from autotris.cli import main; main()' "$@"
+LAUNCHER
+  chmod 755 "$pkgdir/usr/bin/$pkgname"
+
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}
